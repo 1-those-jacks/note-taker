@@ -40,6 +40,21 @@ app.post('/api/notes', (req, res) => {
 			text,
 		};
 
+		fs.readFile('./db/db.json', 'utf8', (err, data) => {
+			if (err) {
+				console.error(err);
+			} else {
+				const parsedNotes = JSON.parse(data);
+				parsedNotes.push(newNote);
+
+				fs.writeFile('./db/db.json', JSON.stringify(parsedNotes, null, 4), (writeErr) =>
+					writeErr
+						? console.error(writeErr)
+						: console.info("Successfully updated notes!")
+				);
+			}
+		});
+
 		const response = {
 			status: 'success',
 			body: newNote,
