@@ -2,6 +2,7 @@ const express = require('express');
 const path = require('path');
 const termData = require('./db/db.json');
 const fs = require('fs');
+const uniqid = require("uniqid");
 
 const PORT = 3000;
 
@@ -41,6 +42,7 @@ app.post('/api/notes', (req, res) => {
 		const newNote = {
 			title,
 			text,
+			id: uniqid(),
 		};
 
 		fs.readFile('./db/db.json', 'utf8', (err, data) => {
