@@ -26,11 +26,14 @@ app.get('/notes', (req, res) =>
 );
 
 // Pulls notes from db.json file.
-app.get('/api/notes', (req, res) => res.json(termData));
+app.get('/api/notes', (req, res) => {
+	let data = fs.readFileSync('./db/db.json', 'utf8');
+	res.json(JSON.parse(data));
+});
 
 // POST Route for notes page.
 app.post('/api/notes', (req, res) => {
-	console.info(`${req.method} request received to add a review`);
+	console.info(`${req.method} request received to add a note`);
 
 	const {title, text} = req.body;
 
