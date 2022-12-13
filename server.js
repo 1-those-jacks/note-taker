@@ -4,7 +4,7 @@ const termData = require('./db/db.json');
 const fs = require('fs');
 const uniqid = require("uniqid");
 
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 const app = express();
 
